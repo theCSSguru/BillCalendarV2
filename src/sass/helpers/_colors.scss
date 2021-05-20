@@ -1,0 +1,57 @@
+//// Colors
+
+:root {
+	// // Brand Colors
+	--brand-color-1: #00ffff; // cyan
+	--brand-color-2: #66ff00; // green
+	--brand-color-3: #ff0000; // red
+	--brand-color-4: #ffbf00; // orange	
+	--brand-savings: var(--brand-color-1);
+	--brand-income: var(--brand-color-2);
+	--brand-bill: var(--brand-color-3);
+	--brand-deposit: var(--brand-color-4);
+	--calendar-color-1: #0e0f10;
+	--calendar-color-2: #161718;
+	--calendar-color-3: #1d1f20;
+	--calendar-color-4: #242629;
+	--calendar-color-5: #2b2e31;
+	--calendar-color-6: #323639;
+	--calendar-color-7: #3a3d41;
+	--calendar-color-day-hover: #2c2f2f;
+	--calendar-color-today: var(--calendar-color-6);
+	--white: #ffffff;
+	--black: #000000;
+	// Copied Bootstrap Colors
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+[data-theme="light"] {
+	// Light Theme (white and grey scale)
+	--calendar-color-1: #ffffff;
+	--calendar-color-2: #f7f7f8;
+	--calendar-color-3: #eff0f1;
+	--calendar-color-4: #e7e8e9;
+	--calendar-color-5: #dfe0e2;
+	--calendar-color-6: #d6d9db;
+	--calendar-color-7: #ced1d4;
+	--calendar-color-day-hover: #f5feff;
+	--calendar-color-today: #fdffeb;
+}

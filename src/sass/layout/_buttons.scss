@@ -1,0 +1,71 @@
+//// Buttons
+.btn {
+	all: unset;
+	background: var(--black);
+	font-size: 1rem;
+	color: var(--white);
+	padding: 0.5rem 2rem;
+	border-radius: $borderRadius;
+	position: relative;
+	z-index: 1;
+	cursor: pointer;
+	&:before {
+		@extend %fade;
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 2;
+		background: rgba(255,255,255,0.25);
+		border-radius: $borderRadius;
+		opacity: 0;
+	}
+	&:hover:before {
+		opacity: 1;
+	}
+	& * {
+		position: relative;
+		z-index: 3;
+	}
+	&-primary {
+		background: var(--primary);
+	}
+	&-secondary {
+		background: var(--secondary);
+	}
+	&-success {
+		background: var(--success);
+	}
+	&-danger {
+		background: var(--danger);
+	}
+	&-warning {
+		background: var(--warning);
+	}
+	&-info {
+		background: var(--info);
+	}
+	&-light {
+		color: var(--black);
+		background: var(--light);
+		@include light-theme {
+			background: var(--dark);
+		}
+	}
+	&-dark {
+		background: var(--dark);
+		@include light-theme {
+			color: var(--dark);
+			background: var(--light);
+			&:hover {
+				color: var(--dark);
+			}
+			&:before {
+				background: rgba(0,0,0,0.15);
+			}
+		}
+	}
+}

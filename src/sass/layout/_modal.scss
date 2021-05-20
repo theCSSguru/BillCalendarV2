@@ -1,0 +1,282 @@
+//// Modal
+.bc {
+  &-modal {
+		@extend %noselect;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+    z-index: 9999999;
+    width: 100vw;
+    height: 100vh;
+		outline: 0;
+		background: rgba(0,0,0,0.75);
+		@include light-theme {
+			background: rgba(255,255,255,0.75);
+		}
+		@media (max-width: $breakpointSM) {
+			display: block;
+		}
+		&-content {
+			background-color: var(--calendar-color-3);
+			border: 1px var(--calendar-color-5) solid;
+			border-radius: 0;
+			box-shadow: none;
+			@include light-theme {
+				background-color: var(--white);
+				border: none;
+			}
+		}
+		&-header {
+			border: none;
+			padding: 2rem 2rem 1.5rem;
+		}
+		&-title {
+			font-size: 1.5rem;
+			color: var(--white);
+			line-height: normal;
+			@include light-theme {
+				color: var(--dark);
+			}
+		}
+		&-body {
+			padding: 0 2rem;
+			color: var(--white);
+			@include light-theme {
+				color: var(--black);
+			}
+		}
+		&-footer {
+			//border-top: 1px rgba(255,255,255,0.15) solid;
+			margin: 0 2rem 0;
+			padding: 2rem 0;
+			text-align: right;
+			@media (max-width: $breakpointSM) {
+				display: grid;
+				grid-template-columns: auto auto;
+				text-align: center;
+				grid-gap: 1rem;
+				margin-top: 1.5rem;
+			}
+			//@include light-theme {
+			//	border-top: 1px rgba(0,0,0,0.15) solid;
+			//}
+		}
+		&-backdrop {
+			&.show {
+				opacity: 0.75;
+			}
+		}
+		&-dialog {
+			@extend %scrollbar;
+			margin: 1.75rem auto;
+			box-shadow: $softShadow;
+			max-height: 100%;
+			overflow-y: auto;
+			border-radius: 1rem;
+			@media (min-width: $breakpointSM) {
+				max-width: 100%;
+				width: 40rem;
+			}
+			@media (max-width: $breakpointSM) {
+				margin: 0;
+			}
+		}
+    label {
+			font-size: 1rem;
+			display: inline-block;
+			line-height: normal;
+			margin: 0 0.25rem 0.5rem;
+			opacity: 0.75;
+      &.form-check-label {
+        margin-bottom: 0;
+      }
+    }
+    input[type=text],
+    input[type=number] {
+      font-size: 1.25rem;
+      padding: 1rem 1rem 0.85rem;
+      color: var(--white);
+      width: 100%;
+      background-color: var(--calendar-color-1); 
+			border: 1px var(--calendar-color-7) solid;
+			border-radius: $borderRadius;
+			&:focus,
+			&:active {
+				border: 1px var(--teal) solid;
+				outline: none;
+			}
+			@include light-theme {
+				color: var(--black);
+			}
+      @media (max-width: $breakpointSM) {
+        margin-bottom: 1rem;
+      }
+    }
+    input[type=number] {
+      text-align: center;
+      padding: 1rem 1rem 0.85rem;
+      &::-webkit-inner-spin-button, 
+      &::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+      }
+		}
+		&-hr {
+			//padding-bottom: 2rem !important;
+			//border-bottom: 1px rgba(255,255,255,0.1) solid !important;
+			margin-bottom: 2rem !important;
+			//@include light-theme {
+		  //  border-bottom: 1px rgba(0,0,0,0.1) solid !important;
+			//}
+		}
+    &-amount {
+      position: relative;
+      z-index: 1;
+      &-dollar-sign {
+        @extend %noselect;
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        z-index: 2;
+        font-size: 1.5rem;
+        line-height: normal;
+				color: var(--white);
+				opacity: 0.5;
+				@include light-theme {
+					color: var(--dark);
+				}
+      }
+    }
+    &-faded {
+      pointer-events: none;
+      opacity: 0.25;
+    }
+    &-type {
+			& .row {
+				margin-bottom: 0;
+			}
+      button {
+        @extend %fade;
+        font-size: 1rem;
+        color: var(--white);
+        padding: 1rem 0;
+        line-height: normal;
+        width: 100%;
+        border: none;
+        text-align: center;
+        border: 1px var(--calendar-color-5) solid;
+				background-color: var(--calendar-color-4);
+				border-radius: $borderRadius;
+				overflow: hidden;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+				@include light-theme {
+					color: var(--black);
+					background-color: var(--white);
+				}
+        &:hover,
+        &:focus,
+        &:active,
+        &.bc-selected {
+					background-color: var(--calendar-color-1);
+					border: 1px var(--teal) solid;
+					outline: none;
+					@include light-theme {
+						background-color: var(--calendar-color-2);
+					}
+        }
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 0.5rem;
+        }
+      }
+      &-bill {
+        &:before {
+          background-color: var(--brand-bill);
+        }
+      }
+      &-deposit {
+        &:before {
+          background-color: var(--brand-deposit);
+        }
+      }
+      &-savings {
+        &:before {
+          background-color: var(--brand-savings);
+        }
+      }
+      &-income {
+        &:before {
+          background-color: var(--brand-income);
+        }
+      }
+    }
+    &-frequency {
+			&-count {
+				width: 4rem !important;
+				margin: 0 0.25rem;
+				&-wrap {
+					font-size: 1.25rem;
+					padding: 1rem;
+					border-top: 1px var(--calendar-color-4) solid;
+					span {
+						position: relative;
+						top: -0.25rem;
+					}
+					@media (max-width: $breakpointSM) {
+						.bc-modal-frequency-count {
+							margin-bottom: 0 !important;
+						}
+					}
+				}
+			}
+		}
+		&-repeat-row {
+			margin-bottom: 1rem;
+		}
+    &-repeat-items {
+			margin-bottom: 0;
+			padding: 1rem;
+			border-top: 1px var(--calendar-color-4) solid;
+			.form-check {
+				display: flex;
+				align-items: center;
+				@media (max-width: $breakpointSM) {
+					margin-top: 1rem;
+				}
+				&-input {
+					cursor: pointer;
+					margin-right: 0.5rem;
+				}
+				&-label {
+					font-size: 1.25rem;
+					opacity: 1;
+					cursor: pointer;
+				}
+      }
+    }
+  }
+}
+@media (max-width: $breakpointSM) {
+  #bcModalAmount {
+    margin: 0;
+  }
+  .form-check-inline {
+    margin-bottom: 0.5rem;
+  }
+  .modal .bc-modal-frequency-row {
+    margin: -0.5rem 0 0;
+  }
+}

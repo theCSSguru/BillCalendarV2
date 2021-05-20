@@ -1,0 +1,544 @@
+//// Layout
+.bc {
+	&-wrapper {
+		display: grid;
+    grid-template-rows: auto auto 1fr;
+    height: 100vh;
+    @media (max-width: $breakpointMD) {
+			height: auto;
+		}
+	}
+  &-header {
+		@extend %fade;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: var(--calendar-color-2);
+    position: relative;
+    border-bottom: 1px var(--calendar-color-1) solid;
+    z-index: 2;
+		@include light-theme {
+			background-color: var(--teal);
+		}
+    @media (max-width: $breakpointMD) {
+      height: auto;
+		}
+		&-two {
+			@extend %fade;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.5rem;
+			background: var(--calendar-color-1);
+			position: relative;
+			border-bottom: 1px var(--calendar-color-1) solid;
+			z-index: 2;
+			@include light-theme {
+				background-color: var(--gray);
+			}
+			@media (max-width: $breakpointMD) {
+				height: auto;
+			}
+			@media (max-width: $breakpointSM) {
+				justify-content: center;
+			}
+		}
+    &-menu {
+      $iconSize: 2rem;
+      &-toggle {
+        width: $iconSize / 1.25;
+        height: $iconSize;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin: 0 ($iconSize / 2) 0 ($iconSize / 6);
+        &:active,
+        &:focus,
+        &:hover {
+          outline: none;
+        }
+        @media (max-width: $breakpointMD) {
+          margin: 0 1rem 0 0.5rem;
+        }
+      }
+      &-icon {
+        &-bar {
+          @extend %fade;
+          display: block;
+          width: 100%;
+          height: $iconSize / 8;
+          margin: ($iconSize / 8) 0;
+					background-color: var(--white);
+					border-radius: $borderRadius;
+        }
+        &-text {
+          display: none;
+        }
+      }
+    }
+    &-navigation {
+      @extend %fade;
+      width: 20rem;
+      position: fixed;
+			top: 0.5rem;
+			bottom: 1rem;
+			left: 0;
+      background: var(--calendar-color-3);
+			transform: translateX(-20rem);
+			border-radius: 0 1rem 1rem 0;
+			overflow: hidden;
+      z-index: 4;
+			@include light-theme {
+				background: var(--white);
+			}
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3.15rem;
+        background: var(--calendar-color-2);
+        border-bottom: 1px var(--calendar-color-1) solid;
+				@include light-theme {
+					background: var(--teal);
+				}
+      }
+      &.open {
+        transform: translateX(0);
+				box-shadow: $softShadow;
+      }
+      &-list {
+        margin: 0;
+        padding: 0.5rem 0 0;
+        position: absolute;
+        top: 3.25rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+				overflow: auto;
+				line-height: normal;
+        li {
+					list-style: none;
+					padding: 0.5rem 1rem;
+          a {
+            @extend %fade;
+            color: var(--white);
+            display: block;
+            padding: 1rem 2rem;
+						font-size: 1.25rem;
+						text-decoration: none;
+						border-radius: 1rem;
+						background: var(--calendar-color-2);
+						@include light-theme {
+							color: var(--dark);
+							background: var(--calendar-color-2);
+						}
+            &:hover {
+              text-decoration: none;
+              background: var(--calendar-color-1);
+							@include light-theme {
+								background: var(--calendar-color-3);
+							}
+            }
+          }
+        }
+      }
+      .bc-header-menu-toggle {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+      }
+      .bc-header-menu-icon-bar {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+          position: absolute;
+          top: 0.75rem;
+          left: 0;
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+          position: absolute;
+          top: 0.75rem;
+          left: 0;
+        }
+      }
+      .bc-header-logo {
+        position: absolute;
+        top: 0.6rem;
+        left: 3.45rem;
+      }
+    }
+    &-logo {
+      @extend %noselect;
+      &-wrap {
+        display: flex;
+        align-items: center;
+        flex-basis: calc(100%/3);
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.65rem;
+      font-weight: 200;
+      color: var(--white);   
+      letter-spacing: 0.05rem;   
+      line-height: normal;
+      cursor: default;
+      span {
+				margin-left: 0.15rem;
+				position: relative;
+				&:after {
+					@extend %ba;
+					position: absolute;
+					top: 0.35rem;
+					left: 1.17rem;
+					width: 0.3rem;
+					height: 0.3rem;
+					border-radius: 1rem;;
+					background: var(--brand-color-3);
+					z-index: 2;
+				}
+      }
+      strong {
+        font-weight: 700;
+      }
+      &-icon {
+        $iconSize: 1rem;
+        position: relative;
+        top: $iconSize / 6;
+        z-index: 1;
+        &-tab {
+          border: ($iconSize / 12) var(--calendar-color-3) solid;
+          border-radius: $iconSize / 6;
+          width: $iconSize / 4;
+          height: $iconSize / 2.75;
+          background-color: var(--brand-color-1);
+          position: absolute;
+          top: -($iconSize / 5);
+          left: $iconSize / 6;
+          z-index: 2;          
+          &:nth-child(2) {
+            left: $iconSize / 1.75;
+          }
+        }
+        &-calendar {
+          border: ($iconSize / 12) var(--white) solid;
+          border-radius: $iconSize / 6;
+          width: $iconSize;
+          height: $iconSize;
+          position: relative;
+          z-index: 1;
+          &-header {
+            @extend %fade;
+            background-color: var(--white);
+            height: $iconSize / 6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+          }
+        }
+        &-dollar-sign {
+          color: var(--brand-color-2);
+					font-size: $iconSize / 1.5;
+					font-weight: bold;
+          line-height: normal;
+          position: absolute;
+          top: $iconSize / 8;
+          left: $iconSize / 5;
+          z-index: 2;
+        }
+      }
+    }
+    &-month {
+      $arrowSize: 0.5rem;
+      font-weight: 700;
+      margin-right: 0.25rem;
+      &-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: calc(100%/3);
+        font-size: 1.75rem;
+        color: var(--white);
+        line-height: normal;  
+        @media (max-width: $breakpointSM) {
+          font-size: 1.5rem;
+					width: 100%;
+					padding: 0.25rem 0;
+				}
+      }
+      &-prev,
+      &-next {
+        @extend %fade;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        cursor: pointer;
+        opacity: 0.25;
+        margin: 0 ($arrowSize * 1.5);
+        @media (max-width: $breakpointSM) {
+          margin: 0 0.5rem;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          opacity: 0.75;
+        }
+        span {
+          display: none;
+        }
+      }
+      &-prev {
+        border-width: $arrowSize ($arrowSize * 1.5) $arrowSize 0;
+        border-color: transparent var(--white) transparent transparent;
+      }
+      &-next {
+        border-width: $arrowSize 0 $arrowSize ($arrowSize * 1.5);
+        border-color: transparent transparent transparent var(--white);
+      }
+    }
+    &-stats {
+      display: flex;
+      flex-basis: calc(100%/3);
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+      line-height: normal;
+      @media (max-width: $breakpointMD) {
+        font-size: 0.75rem;
+      }
+			@media (max-width: $breakpointSM) {
+				margin: 0.5rem 0 0.25rem;
+				font-size: 1rem;
+				position: fixed;
+				bottom: 0.5rem;
+				left: auto;
+				right: 0.5rem;
+				width: auto;
+				margin: 0;
+			}
+      li {
+        list-style: none;
+        width: 2rem;
+        height: 2rem;
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+				justify-content: center;
+				border-radius: $borderRadius;
+        &:hover {
+          cursor: default;
+        }
+        @media (max-width: $breakpointMD) {
+					width: auto;
+					height: auto;
+					margin: 0;
+					padding: 0.5rem 0.75rem;
+					line-height: 1;
+        }
+				@media (max-width: $breakpointSM) {
+					margin: 0 0.25rem;
+				}
+				&:last-child {
+					@media (max-width: $breakpointSM) {
+						margin-right: 0;
+					}
+				}
+      }
+      span {
+        color: var(--white);
+      }
+      &-deposits {
+        background-color: var(--brand-deposit);
+      }
+      &-savings {
+        background-color: var(--brand-savings);
+      }
+      &-bills {
+        background-color: var(--brand-bill);
+      }
+      &-income {
+        background-color: var(--brand-income);
+      }
+		}
+		&-actions {
+			&-signup {
+				&:hover {
+					color: var(--white);
+				}
+				svg {
+					width: 1rem;
+					margin-right: 0.25rem;
+					@media (max-width: $breakpointSM) {
+						margin: 0;
+					}
+				}
+			}
+			@media (max-width: $breakpointSM) {
+				span {
+					display: none;
+				}
+			}
+		}
+  }
+  &-mobile-list {
+    @extend %scrollbar;
+    display: block;
+    padding: 1.5rem;
+    max-height: 75vh;
+    overflow-y: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background-color: var(--calendar-color-2);
+		box-shadow: $softShadow;
+		border-top: 4px var(--teal) solid;
+		margin: 0 0.5rem 0;
+    border-radius: 1rem 1rem 0 0;
+		&.hidden {
+			right: auto;
+		}
+		@include light-theme {
+			background-color: var(--white);
+		}
+    @media (max-width: $breakpointMD) {
+      display: block;
+    }
+    .badge {
+      font-size: 1.25rem;
+			margin-bottom: 0.75rem;
+			color: var(--white);
+			width: 100%;
+			@include light-theme {
+				color: var(--black);
+			}
+			&:before {
+				padding: 0.5rem;
+				@media (max-width: $breakpointMD) {
+					display: inline-block;
+				}
+			}
+      &:last-child {
+        margin-bottom: 0;
+			}
+			&.badge-income {
+				& .item {
+					display: inline;
+					font-size: 1.25rem;
+					&:before {
+						display: inline;
+					}
+				}
+			}
+    }
+    .bc-calendar-day-income {
+      margin-bottom: 0.75rem;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &-date {
+      font-size: 1.5rem;
+      color: var(--white);
+      line-height: normal;
+      margin-bottom: 1rem;
+			@include light-theme {
+				color: var(--black);
+			}
+    }
+    &-actions {
+      padding: 0;
+      text-align: center;
+			@media (max-width: $breakpointSM) {
+				display: grid;
+				grid-template-columns: auto auto;
+				text-align: center;
+				grid-gap: 1rem;
+				margin-top: 1.5rem;
+			}
+    }
+  }
+  &-mobile-day-selected {
+    @media (max-width: $breakpointMD) {
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border: 2px var(--teal) solid !important;
+      }
+    }
+  }
+  &-theme-switch {
+    &-wrapper {
+      display: flex;
+			align-items: center;
+			width: calc(100%/3);
+      input {
+        display: none;
+			}
+			@media (max-width: $breakpointSM) {
+				position: fixed;
+				bottom: 0.5rem;
+				left: 0.5rem;
+				width: auto;
+			}
+    }
+    &-label {
+      display: inline-block;
+      height: 2rem;
+      width: 3rem;
+      margin: 0;
+      position: relative;
+    }
+    &-slider {
+			background-color: var(--teal);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    &-slider:before {
+      content: "";
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: var(--white);
+      position: absolute;
+      left: 0.25rem;
+      bottom: 0.25rem;
+      transition: 0.4s;
+    }
+    input:checked + &-slider {
+      background-color: var(--calendar-color-7);
+			@include light-theme {
+				background-color: var(--teal);
+			}
+    }
+    input:checked + &-slider:before {
+      transform: translateX(1rem);
+    }
+    &-slider.bc-theme-switch-round {
+      border-radius: 1rem;
+    }
+    &-slider.bc-theme-switch-round:before {
+      border-radius: 1rem;
+    }
+  }
+}
